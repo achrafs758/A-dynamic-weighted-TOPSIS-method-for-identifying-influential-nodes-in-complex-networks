@@ -1,106 +1,64 @@
-# Jupyter Notebook
+# TOPSIS implementation in Python
+Technique for Order of Preference by Similarity to Ideal Solution (TOPSIS)
+CHING-LAI Hwang and Yoon introduced TOPSIS in 1981 in their Multiple Criteria Decision Making (MCDM) and Multiple Criteria Decision Analysis (MCDA) methods [1]. TOPSIS strives to minimize the distance between the positive ideal solution and the chosen alternative, as well as to maximize the distance between the negative ideal solution and the chosen alternative. [2]. TOPSIS, in a nutshell, aids researchers to rank alternative items by identifying some criteria. We present alternative information and the criteria for each in the following decision matrix:
+![image](https://user-images.githubusercontent.com/44522286/131339802-c16bb37c-6479-40e5-b28f-b79471b9bb26.png)
+It is possible that some criteria are more effective than others. Therefore, some weights are given to their importance. It is required that the summation of n weights equals one.
 
-![Github Actions Status](https://github.com/jupyter/notebook/workflows/Build/badge.svg)
-[![Documentation Status](https://readthedocs.org/projects/jupyter-notebook/badge/?version=latest)](https://jupyter-notebook.readthedocs.io/en/latest/?badge=latest)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyter/notebook/main?urlpath=tree)
-[![codecov](https://codecov.io/gh/jupyter/notebook/branch/master/graph/badge.svg)](https://codecov.io/gh/jupyter/notebook)
+![image](https://user-images.githubusercontent.com/44522286/131339921-f9ef0065-ef39-4fd6-bd52-a3e27c51b0bb.png)
 
-The Jupyter notebook is a web-based notebook environment for interactive
-computing.
+Jahanshahloo et al, (2006), explained the TOPSIS in six main phases as follows: 
 
-![Jupyter notebook example](docs/resources/running_code_med.png 'Jupyter notebook example')
+## 1)	Normalized Decision Matrix
+It is the first phase of TOPSIS to normalize the process. Researchers have proposed different types of normalization. In this section, we identify the most commonly used normalization methods. The criterion or attribute is divided into two categories, cost and benefit. There are two formulas for normalizing the decision matrix for each normalization method: one for benefit criteria and one for cost criteria. According to Vafaei et al (2018), some of these normalization methods include:
 
-### Notice
+![image](https://user-images.githubusercontent.com/44522286/131340118-1f755eb0-ea87-4a06-acf1-24a86e25c910.png)
 
-The Jupyter Notebook project is currently undertaking a transition to a more modern code base built from the ground-up using JupyterLab components and extensions.
+All of the above normalization methods were coded in Normalization.py. Also, there is another related file called Normalized_Decision_Matrix.py, implementing the normalization method on the decision matrix.  Now we have anormalized decision matrix as follows:
 
-There is new stream of work which was submitted and then accepted as a Jupyter Enhancement Proposal (JEP) as part of the next version (v7): https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
+![image](https://user-images.githubusercontent.com/44522286/131340180-3ac3ae5e-45f9-4351-a880-10da0227b1ca.png)
 
-There is also a plan to continue maintaining Notebook v6 with bug and security fixes only, to ease the transition to Notebook v7: https://github.com/jupyter/notebook-team-compass/issues/5#issuecomment-1085254000
+## 2)	Weighted Normalized Decision Matrix
+The Weighted Normalized Decision Matrix is calculated by multiplying the normalized decision matrix by the weights.
 
-#### Notebook v7
+![image](https://user-images.githubusercontent.com/44522286/131340240-28dd0e6c-09db-4eef-a3c3-99c9ad0ac9ab.png)
 
-The next major version of Notebook will be based on:
+ This multiplication is performed in the Weighted_Normalized_Decision_Matrix.py file. Now, we have a weighted normalized decision matrix as follows:
+ 
+ ![image](https://user-images.githubusercontent.com/44522286/131340385-b783aa08-cbbe-4987-8ac1-7bfeb839b793.png)
 
-- JupyterLab components for the frontend
-- Jupyter Server for the Python server
+## 3)	Ideal Solutions
+As was mentioned, TOPSIS strives to minimize the distance between the positive ideal solution and the chosen alternative, as well as to maximize the distance between the negative ideal solution and the chosen alternative. But what are the positive and negative ideal solutions? 
 
-This represents a significant change to the `jupyter/notebook` code base.
+If our attribute or criterion is profit-based, positive ideal solution (PIS) and negative ideal solution (NIS) are:
 
-To learn more about Notebook v7: https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
+![image](https://user-images.githubusercontent.com/44522286/131340856-bcc7f6b3-a812-4b0a-8e1a-7f1c8345094f.png)
 
-#### Classic Notebook v6
+If our attribute or criterion is cost-based, positive ideal solution (PIS) and negative ideal solution (NIS) are:
 
-Maintainance and security-related issues are now being addressed in the [`6.4.x`](https://github.com/jupyter/notebook/tree/6.4.x) branch.
+![image](https://user-images.githubusercontent.com/44522286/131340875-ee1777de-cacf-4725-ac2d-2c9bb870e513.png)
 
-A `6.5.x` branch will be soon created and will depend on [`nbclassic`](https://github.com/jupyter/nbclassic) for the HTML/JavaScript/CSS assets.
+In our code, ideal solutions are calculated in Ideal_Solution.py.
 
-New features and continuous improvement is now focused on Notebook v7 (see section above).
+4)	Separation measures
+It is necessary to introduce a measure that can measure how far alternatives are from the ideal solutions. Our measure comprise two main sections:
+The separation of each alternative from the PIS is calculated as follows:
 
-If you have an open pull request with a new feature or if you were planning to open one, we encourage switching over to the Jupyter Server and JupyterLab architecture, and distribute it as a server extension and / or JupyterLab prebuilt extension. That way your new feature will also be compatible with the new Notebook v7.
+![image](https://user-images.githubusercontent.com/44522286/131340929-b68fa07a-1728-41ac-938b-da4fd0a74cd3.png)
 
-### Jupyter notebook, the language-agnostic evolution of IPython notebook
+Also, the separation of each alternative from the NIS is calculated as follows:
 
-Jupyter notebook is a language-agnostic HTML notebook application for
-Project Jupyter. In 2015, Jupyter notebook was released as a part of
-The Big Split™ of the IPython codebase. IPython 3 was the last major monolithic
-release containing both language-agnostic code, such as the _IPython notebook_,
-and language specific code, such as the _IPython kernel for Python_. As
-computing spans across many languages, Project Jupyter will continue to develop the
-language-agnostic **Jupyter notebook** in this repo and with the help of the
-community develop language specific kernels which are found in their own
-discrete repos.
+![image](https://user-images.githubusercontent.com/44522286/131340955-ce9e05d2-bfb4-4544-8d0b-609623881f5f.png)
 
-- [The Big Split™ announcement](https://blog.jupyter.org/the-big-split-9d7b88a031a7)
-- [Jupyter Ascending blog post](https://blog.jupyter.org/jupyter-ascending-1bf5b362d97e)
+5)	Closeness to the Ideal Solution
+Now that the distance between ideal solutions and alternatives has been calculated, we rank our alternatives according to how close they are to ideal solutions. The distance measure is calculated by the following formula:
 
-## Installation
+![image](https://user-images.githubusercontent.com/44522286/131340990-f18f6d58-93f1-419a-958e-281accd36cfa.png)
 
-You can find the installation documentation for the
-[Jupyter platform, on ReadTheDocs](https://jupyter.readthedocs.io/en/latest/install.html).
-The documentation for advanced usage of Jupyter notebook can be found
-[here](https://jupyter-notebook.readthedocs.io/en/latest/).
+It is clear that :
 
-For a local installation, make sure you have
-[pip installed](https://pip.readthedocs.io/en/stable/installing/) and run:
+![image](https://user-images.githubusercontent.com/44522286/131341036-7899bc44-4e7b-401b-8c3e-7e22fffd571d.png)
 
-```bash
-pip install notebook
-```
-
-## Usage - Running Jupyter notebook
-
-### Running in a local installation
-
-Launch with:
-
-```bash
-jupyter notebook
-```
-
-### Running in a remote installation
-
-You need some configuration before starting Jupyter notebook remotely. See [Running a notebook server](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
-
-## Development Installation
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to set up a local development installation.
-
-## Contributing
-
-If you are interested in contributing to the project, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
-
-## Community Guidelines and Code of Conduct
-
-This repository is a Jupyter project and follows the Jupyter
-[Community Guides and Code of Conduct](https://jupyter.readthedocs.io/en/latest/community/content-community.html).
-
-## Resources
-
-- [Project Jupyter website](https://jupyter.org)
-- [Online Demo at jupyter.org/try](https://jupyter.org/try)
-- [Documentation for Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/latest/) [[PDF](https://media.readthedocs.org/pdf/jupyter-notebook/latest/jupyter-notebook.pdf)]
-- [Korean Version of Installation](https://github.com/ChungJooHo/Jupyter_Kor_doc/)
-- [Documentation for Project Jupyter](https://jupyter.readthedocs.io/en/latest/index.html) [[PDF](https://media.readthedocs.org/pdf/jupyter/latest/jupyter.pdf)]
-- [Issues](https://github.com/jupyter/notebook/issues)
-- [Technical support - Jupyter Google Group](https://discourse.jupyter.org/)
+## 6)	Ranking
+Now, alternatives are ranked in decreasing order based on closeness to the ideal solution. Both of (5) and (6) are calculated in Distance_Between_Ideal_and_Alternatives.py.
+## 7)	TOPSIS
+In this section, all of the previous .py files are employed and utilized in an integrated way.
