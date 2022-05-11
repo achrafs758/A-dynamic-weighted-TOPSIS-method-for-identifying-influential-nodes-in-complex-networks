@@ -1,173 +1,106 @@
-<img src="http://mypy-lang.org/static/mypy_light.svg" alt="mypy logo" width="300px"/>
+# Jupyter Notebook
 
-Mypy: Static Typing for Python
-=======================================
+![Github Actions Status](https://github.com/jupyter/notebook/workflows/Build/badge.svg)
+[![Documentation Status](https://readthedocs.org/projects/jupyter-notebook/badge/?version=latest)](https://jupyter-notebook.readthedocs.io/en/latest/?badge=latest)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/jupyter/notebook/main?urlpath=tree)
+[![codecov](https://codecov.io/gh/jupyter/notebook/branch/master/graph/badge.svg)](https://codecov.io/gh/jupyter/notebook)
 
-[![Stable Version](https://img.shields.io/pypi/v/mypy?color=blue)](https://pypi.org/project/mypy/)
-[![Downloads](https://img.shields.io/pypi/dm/mypy)](https://pypistats.org/packages/mypy)
-[![Build Status](https://api.travis-ci.com/python/mypy.svg?branch=master)](https://travis-ci.com/python/mypy)
-[![Documentation Status](https://readthedocs.org/projects/mypy/badge/?version=latest)](https://mypy.readthedocs.io/en/latest/?badge=latest)
-[![Chat at https://gitter.im/python/typing](https://badges.gitter.im/python/typing.svg)](https://gitter.im/python/typing?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+The Jupyter notebook is a web-based notebook environment for interactive
+computing.
 
+![Jupyter notebook example](docs/resources/running_code_med.png 'Jupyter notebook example')
 
-Got a question?
----------------
+### Notice
 
-We are always happy to answer questions! Here are some good places to ask them:
+The Jupyter Notebook project is currently undertaking a transition to a more modern code base built from the ground-up using JupyterLab components and extensions.
 
-- for anything you're curious about, try [gitter chat](https://gitter.im/python/typing)
-- for general questions about Python typing, try [typing discussions](https://github.com/python/typing/discussions)
+There is new stream of work which was submitted and then accepted as a Jupyter Enhancement Proposal (JEP) as part of the next version (v7): https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
 
-If you're just getting started,
-[the documentation](https://mypy.readthedocs.io/en/stable/introduction.html)
-and [type hints cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
-can also help answer questions.
+There is also a plan to continue maintaining Notebook v6 with bug and security fixes only, to ease the transition to Notebook v7: https://github.com/jupyter/notebook-team-compass/issues/5#issuecomment-1085254000
 
-If you think you've found a bug:
+#### Notebook v7
 
-- check our [common issues page](https://mypy.readthedocs.io/en/stable/common_issues.html)
-- search our [issue tracker](https://github.com/python/mypy/issues) to see if
-  it's already been reported
-- consider asking on [gitter chat](https://gitter.im/python/typing)
+The next major version of Notebook will be based on:
 
-To report a bug or request an enhancement:
+- JupyterLab components for the frontend
+- Jupyter Server for the Python server
 
-- report at [our issue tracker](https://github.com/python/mypy/issues)
-- if the issue is with a specific library or function, consider reporting it at
-  [typeshed tracker](https://github.com/python/typeshed/issues) or the issue
-  tracker for that library
+This represents a significant change to the `jupyter/notebook` code base.
 
-To discuss a new type system feature:
-- discuss at [typing-sig mailing list](https://mail.python.org/archives/list/typing-sig@python.org/)
-- there is also some historical discussion [here](https://github.com/python/typing/issues)
+To learn more about Notebook v7: https://jupyter.org/enhancement-proposals/79-notebook-v7/notebook-v7.html
 
+#### Classic Notebook v6
 
-What is mypy?
--------------
+Maintainance and security-related issues are now being addressed in the [`6.4.x`](https://github.com/jupyter/notebook/tree/6.4.x) branch.
 
-Mypy is a static type checker for Python.
+A `6.5.x` branch will be soon created and will depend on [`nbclassic`](https://github.com/jupyter/nbclassic) for the HTML/JavaScript/CSS assets.
 
-Type checkers help ensure that you're using variables and functions in your code
-correctly. With mypy, add type hints ([PEP 484](https://www.python.org/dev/peps/pep-0484/))
-to your Python programs, and mypy will warn you when you use those types
-incorrectly.
+New features and continuous improvement is now focused on Notebook v7 (see section above).
 
-Python is a dynamic language, so usually you'll only see errors in your code
-when you attempt to run it. Mypy is a *static* checker, so it finds bugs
-in your programs without even running them!
+If you have an open pull request with a new feature or if you were planning to open one, we encourage switching over to the Jupyter Server and JupyterLab architecture, and distribute it as a server extension and / or JupyterLab prebuilt extension. That way your new feature will also be compatible with the new Notebook v7.
 
-Mypy is designed with gradual typing in mind. This means you can add type
-hints to your code base slowly and that you can always fall back to dynamic
-typing when static typing is not convenient.
+### Jupyter notebook, the language-agnostic evolution of IPython notebook
 
-Here is a small example to whet your appetite:
+Jupyter notebook is a language-agnostic HTML notebook application for
+Project Jupyter. In 2015, Jupyter notebook was released as a part of
+The Big Split™ of the IPython codebase. IPython 3 was the last major monolithic
+release containing both language-agnostic code, such as the _IPython notebook_,
+and language specific code, such as the _IPython kernel for Python_. As
+computing spans across many languages, Project Jupyter will continue to develop the
+language-agnostic **Jupyter notebook** in this repo and with the help of the
+community develop language specific kernels which are found in their own
+discrete repos.
 
-```python
-number = input("What is your favourite number?")
-print("It is", number + 1)  # error: Unsupported operand types for + ("str" and "int")
+- [The Big Split™ announcement](https://blog.jupyter.org/the-big-split-9d7b88a031a7)
+- [Jupyter Ascending blog post](https://blog.jupyter.org/jupyter-ascending-1bf5b362d97e)
+
+## Installation
+
+You can find the installation documentation for the
+[Jupyter platform, on ReadTheDocs](https://jupyter.readthedocs.io/en/latest/install.html).
+The documentation for advanced usage of Jupyter notebook can be found
+[here](https://jupyter-notebook.readthedocs.io/en/latest/).
+
+For a local installation, make sure you have
+[pip installed](https://pip.readthedocs.io/en/stable/installing/) and run:
+
+```bash
+pip install notebook
 ```
 
-See [the documentation](https://mypy.readthedocs.io/en/stable/index.html) for more examples.
+## Usage - Running Jupyter notebook
 
-In particular, see:
-- [type hints cheat sheet](https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html)
-- [getting started](https://mypy.readthedocs.io/en/stable/getting_started.html)
+### Running in a local installation
 
+Launch with:
 
-Quick start
------------
+```bash
+jupyter notebook
+```
 
-Mypy can be installed using pip:
+### Running in a remote installation
 
-    python3 -m pip install -U mypy
+You need some configuration before starting Jupyter notebook remotely. See [Running a notebook server](https://jupyter-notebook.readthedocs.io/en/stable/public_server.html).
 
-If you want to run the latest version of the code, you can install from git:
+## Development Installation
 
-    python3 -m pip install -U git+https://github.com/python/mypy.git
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for how to set up a local development installation.
 
+## Contributing
 
-Now you can type-check the [statically typed parts] of a program like this:
+If you are interested in contributing to the project, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-    mypy PROGRAM
+## Community Guidelines and Code of Conduct
 
-You can always use the Python interpreter to run your statically typed
-programs, even if mypy reports type errors:
+This repository is a Jupyter project and follows the Jupyter
+[Community Guides and Code of Conduct](https://jupyter.readthedocs.io/en/latest/community/content-community.html).
 
-    python3 PROGRAM
+## Resources
 
-You can also try mypy in an [online playground](https://mypy-play.net/) (developed by
-Yusuke Miyazaki).
-
-[statically typed parts]: https://mypy.readthedocs.io/en/latest/getting_started.html#function-signatures-and-dynamic-vs-static-typing
-
-
-Integrations
-------------
-
-Mypy can be integrated into popular IDEs:
-
-* Vim:
-  * Using [Syntastic](https://github.com/vim-syntastic/syntastic): in `~/.vimrc` add
-    `let g:syntastic_python_checkers=['mypy']`
-  * Using [ALE](https://github.com/dense-analysis/ale): should be enabled by default when `mypy` is installed,
-    or can be explicitly enabled by adding `let b:ale_linters = ['mypy']` in `~/vim/ftplugin/python.vim`
-* Emacs: using [Flycheck](https://github.com/flycheck/) and [Flycheck-mypy](https://github.com/lbolla/emacs-flycheck-mypy)
-* Sublime Text: [SublimeLinter-contrib-mypy](https://github.com/fredcallaway/SublimeLinter-contrib-mypy)
-* Atom: [linter-mypy](https://atom.io/packages/linter-mypy)
-* PyCharm: [mypy plugin](https://github.com/dropbox/mypy-PyCharm-plugin) (PyCharm integrates
-  [its own implementation](https://www.jetbrains.com/help/pycharm/type-hinting-in-product.html) of [PEP 484](https://peps.python.org/pep-0484/))
-* VS Code: provides [basic integration](https://code.visualstudio.com/docs/python/linting#_mypy) with mypy.
-* pre-commit: use [pre-commit mirrors-mypy](https://github.com/pre-commit/mirrors-mypy).
-
-Web site and documentation
---------------------------
-
-Additional information is available at the web site:
-
-  http://www.mypy-lang.org/
-
-Jump straight to the documentation:
-
-  https://mypy.readthedocs.io/
-
-Follow along our changelog at:
-
-  https://mypy-lang.blogspot.com/
-
-
-Contributing
-------------
-
-Help in testing, development, documentation and other tasks is
-highly appreciated and useful to the project. There are tasks for
-contributors of all experience levels.
-
-To get started with developing mypy, see [CONTRIBUTING.md](CONTRIBUTING.md).
-
-If you need help getting started, don't hesitate to ask on [gitter](https://gitter.im/python/typing).
-
-
-Development status
-------------------
-
-Mypy is beta software, but it has already been used in production
-for several years at Dropbox and in many other organizations, and
-it has an extensive test suite.
-
-mypyc and compiled version of mypy
-----------------------------------
-
-[Mypyc](https://github.com/mypyc/mypyc) uses Python type hints to compile Python
-modules to faster C extensions. Mypy is itself compiled using mypyc: this makes
-mypy approximately 4 times faster than if interpreted!
-
-To install an interpreted mypy instead, use:
-
-    python3 -m pip install --no-binary mypy -U mypy
-
-To use a compiled version of a development
-version of mypy, directly install a binary from
-https://github.com/mypyc/mypy_mypyc-wheels/releases/latest.
-
-To contribute to the mypyc project, check out https://github.com/mypyc/mypyc
+- [Project Jupyter website](https://jupyter.org)
+- [Online Demo at jupyter.org/try](https://jupyter.org/try)
+- [Documentation for Jupyter notebook](https://jupyter-notebook.readthedocs.io/en/latest/) [[PDF](https://media.readthedocs.org/pdf/jupyter-notebook/latest/jupyter-notebook.pdf)]
+- [Korean Version of Installation](https://github.com/ChungJooHo/Jupyter_Kor_doc/)
+- [Documentation for Project Jupyter](https://jupyter.readthedocs.io/en/latest/index.html) [[PDF](https://media.readthedocs.org/pdf/jupyter/latest/jupyter.pdf)]
+- [Issues](https://github.com/jupyter/notebook/issues)
+- [Technical support - Jupyter Google Group](https://discourse.jupyter.org/)
