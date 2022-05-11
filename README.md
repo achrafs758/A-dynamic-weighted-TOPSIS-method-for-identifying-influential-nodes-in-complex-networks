@@ -37,7 +37,6 @@ If our attribute or criterion is cost-based, positive ideal solution (PIS) and n
 
 ![image](https://user-images.githubusercontent.com/44522286/131340875-ee1777de-cacf-4725-ac2d-2c9bb870e513.png)
 
-In our code, ideal solutions are calculated in Ideal_Solution.py.
 
 4)	Separation measures
 It is necessary to introduce a measure that can measure how far alternatives are from the ideal solutions. Our measure comprise two main sections:
@@ -59,6 +58,6 @@ It is clear that :
 ![image](https://user-images.githubusercontent.com/44522286/131341036-7899bc44-4e7b-401b-8c3e-7e22fffd571d.png)
 
 ## 6)	Ranking
-Now, alternatives are ranked in decreasing order based on closeness to the ideal solution. Both of (5) and (6) are calculated in Distance_Between_Ideal_and_Alternatives.py.
+Now, alternatives are ranked in decreasing order based on closeness to the ideal solution. 
 ## 7)	TOPSIS
 In this section, all of the previous .py files are employed and utilized in an integrated way.
